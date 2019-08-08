@@ -26,6 +26,8 @@ dependencies:
   # The following adds english_words which is an open-source package
   # The english_words contains a few thousand of the most used English words plus some utility functions.
   english_words: ^3.1.0
+  # A composable, Future-based library for making HTTP requests.
+  http: ^0.12.0+2
 
 dev_dependencies:
   flutter_test:

@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'cover.dart';
-import 'user-infor.dart';
+import "package:flutter/material.dart";
+
+import "user-infor.dart";
+import "cover.dart";
 
 class LoginScreen extends StatefulWidget {
   @override

@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
+
+import "package:my_app/services/http.dart";
 
 class UserInfor extends StatefulWidget {
   @override
@@ -77,9 +79,11 @@ class UserInforState extends State<UserInfor> {
         ));
   }
 
-  void _login() {
-    if (userNameController.text == '111' && userPwdController.text == '111') {
-      Navigator.of(context).pushNamed('/home');
-    }
+  void _login() async {
+    var response = await Http.sendVerifyCode({"phone": "18911024431"});
+    print(response.code);
+    // if (userNameController.text == '111' && userPwdController.text == '111') {
+    //   Navigator.of(context).pushNamed('/home');
+    // }
   }
 }

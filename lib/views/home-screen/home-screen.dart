@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:my_app/views/survey-screen/survey-screen.dart';
+import "package:flutter/material.dart";
+
+import "package:my_app/views/survey-screen/survey-screen.dart";
 
 class HomeScreen extends StatelessWidget {
   final _selectedIndex = 1;
