@@ -6,4 +6,7 @@ class Api {
 
   // verify code
   static const String Send_Verify_Code = BASE_URL + "/api/code/send";
+
+  // task data list
+  static const String Task_Statistic_List = BASE_URL + "/api/filePath/add";
 }

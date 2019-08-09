@@ -20,7 +20,10 @@ class Net {
 
   // post
   static Future post(String url, Map<String, dynamic> params) async {
-    http.Response res = await http.post(url, body: params);
+    http.Response res = await http.post(url, body: params, headers: {
+      "Authorization":
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZDQzZjFhOTZiNGY0ZDdkNjMyZDBiZmQiLCJuYW1lIjoi5bCP6LS6IiwicGhvbmUiOiIxODkxMTAyNDQzMSIsImlhdCI6MTU2NTAwMjE4MCwiZXhwIjoxNTY3NDIxMzgwfQ.QeyUb7jrXzlgnFejaVz-d5IF-Oiqob9UYf3K5yvAnwk"
+    });
     print(res.statusCode);
     return res.body;
   }

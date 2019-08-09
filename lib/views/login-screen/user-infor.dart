@@ -54,34 +54,32 @@ class UserInforState extends State<UserInfor> {
             new Container(
                 margin: new EdgeInsets.fromLTRB(17, 47, 17, 0),
                 child: new Container(
-                  decoration: BoxDecoration(boxShadow: [
-                    BoxShadow(
-                        blurRadius: 6,
-                        offset: Offset(0, 6),
-                        spreadRadius: -3,
-                        color: Colors.green[200])
-                  ]),
-                  child: new Card(
-                      color: Colors.green[700],
-                      child: new Padding(
-                        padding: new EdgeInsets.symmetric(horizontal: 30),
+                    decoration: BoxDecoration(boxShadow: [
+                      BoxShadow(
+                          blurRadius: 6,
+                          offset: Offset(0, 6),
+                          spreadRadius: -3,
+                          color: Color.fromARGB(120, 0, 192, 141))
+                    ]),
+                    child: new Card(
+                        color: Color.fromARGB(255, 0, 192, 141),
                         child: new FlatButton(
-                          child: new Text(
-                            "马上登录",
-                            style: new TextStyle(
-                                color: Colors.white, fontSize: 14),
-                          ),
-                          onPressed: _login,
-                        ),
-                      )),
-                ))
+                            padding: new EdgeInsets.symmetric(horizontal: 20),
+                            onPressed: _login,
+                            textColor: Colors.white,
+                            child: Text(
+                              "马上登录",
+                              style: TextStyle(fontSize: 16.0),
+                            )))))
           ],
         ));
   }
 
   void _login() async {
-    var response = await Http.sendVerifyCode({"phone": "18911024431"});
-    print(response.code);
+    var response = await Http.doLogin({
+      "phone": "18911024431",
+      "code": "community",
+    });
     // if (userNameController.text == '111' && userPwdController.text == '111') {
     //   Navigator.of(context).pushNamed('/home');
     // }
