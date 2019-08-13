@@ -13,13 +13,12 @@ class LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return new Scaffold(
       body: new Container(
-          decoration: BoxDecoration(color: Colors.grey[100]),
           child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[Cover(), UserInfor()],
-            ),
-          )),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[Cover(), UserInfor()],
+        ),
+      )),
     );
   }
 }

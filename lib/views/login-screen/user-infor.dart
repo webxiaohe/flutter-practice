@@ -76,12 +76,12 @@ class UserInforState extends State<UserInfor> {
   }
 
   void _login() async {
-    var response = await Http.doLogin({
-      "phone": "18911024431",
-      "code": "community",
-    });
-    // if (userNameController.text == '111' && userPwdController.text == '111') {
-    //   Navigator.of(context).pushNamed('/home');
-    // }
+    // var response = await Http.doLogin({
+    //   "phone": "18911024431",
+    //   "code": "community",
+    // });
+    if (userNameController.text == "111" && userPwdController.text == "111") {
+      Navigator.of(context).pushNamed("/home");
+    }
   }
 }

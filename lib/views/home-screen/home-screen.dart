@@ -1,7 +1,5 @@
 import "package:flutter/material.dart";
 
-import "package:my_app/views/survey-screen/survey-screen.dart";
-
 class HomeScreen extends StatelessWidget {
   final _selectedIndex = 1;
   @override
@@ -45,7 +43,8 @@ class HomeScreen extends StatelessWidget {
 class Banner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Container(
+        child: Stack(
       fit: StackFit.passthrough,
       children: <Widget>[
         Image.asset(
@@ -53,7 +52,7 @@ class Banner extends StatelessWidget {
           fit: BoxFit.fill,
         )
       ],
-    );
+    ));
   }
 }
 
@@ -75,8 +74,7 @@ class Survey extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return new GestureDetector(
         onTap: () {
-          Navigator.of(context).push(
-              new MaterialPageRoute(builder: (context) => new SurveyScreen()));
+          Navigator.of(context).pushNamed("/survey");
         },
         child: new Container(
           width: size.width / 2 - 2,

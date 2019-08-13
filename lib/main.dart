@@ -1,8 +1,17 @@
 import "package:flutter/material.dart";
-import "views/login-screen/login-screen.dart";
-import "views/home-screen/home-screen.dart";
+import 'dart:io';
+import 'package:flutter/services.dart';
 
-void main() => runApp(new MyApp());
+import 'routes/routes.dart';
+
+void main() {
+  runApp(new MyApp());
+  if (Platform.isAndroid) {
+    SystemUiOverlayStyle systemUiOverlayStyle =
+        SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+  }
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -10,10 +19,8 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: "Welcome to Flutter",
       initialRoute: "/",
-      routes: {
-        "/": (BuildContext context) => LoginScreen(),
-        "/home": (BuildContext context) => HomeScreen(),
-      },
+      onGenerateRoute: routeFactory,
+      routes: routes,
     );
   }
 }
