@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 
 import "package:my_app/services/http.dart";
+import 'package:my_app/routes/parameter.dart';
 
 class UserInfor extends StatefulWidget {
   @override
@@ -17,6 +18,9 @@ class UserInforState extends State<UserInfor> {
   final userPwdController = new TextEditingController();
 
   Widget build(BuildContext context) {
+    Welcome loginInfor = ModalRoute.of(context).settings.arguments;
+    userNameController.text = loginInfor.phone;
+    userPwdController.text = loginInfor.code;
     return new Container(
         margin: EdgeInsets.only(top: 50),
         padding: EdgeInsets.symmetric(horizontal: 23),
@@ -27,7 +31,7 @@ class UserInforState extends State<UserInfor> {
               obscureText: false,
               controller: userNameController,
               decoration: new InputDecoration(
-                  hintText: "请输入用户名",
+                  hintText: "请输入手机号",
                   hintStyle: hintTips,
                   icon: Icon(
                     Icons.person,
@@ -39,10 +43,10 @@ class UserInforState extends State<UserInfor> {
               padding: new EdgeInsets.only(top: 20),
               child: new TextField(
                 style: textTips,
-                obscureText: true,
+                obscureText: false,
                 controller: userPwdController,
                 decoration: new InputDecoration(
-                    hintText: "请输入密码",
+                    hintText: "请输入验证码",
                     hintStyle: hintTips,
                     icon: Icon(
                       Icons.lock,
@@ -80,8 +84,6 @@ class UserInforState extends State<UserInfor> {
     //   "phone": "18911024431",
     //   "code": "community",
     // });
-    if (userNameController.text == "111" && userPwdController.text == "111") {
-      Navigator.of(context).pushNamed("/home");
-    }
+    Navigator.of(context).pushNamed("/home");
   }
 }

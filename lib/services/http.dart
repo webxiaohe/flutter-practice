@@ -3,9 +3,10 @@ import 'dart:convert';
 import 'api.dart';
 import 'net.dart';
 import 'package:my_app/model/verify-code.dart';
+import 'package:my_app/model/userinfor.dart';
 
 class Http {
-  static Future doLogin(Map<String, String> params) async {
+  static Future<UserInfor> doLogin(Map<String, String> params) async {
     var response = await Net.post(Api.DO_LOGIN, params);
     return response;
   }
