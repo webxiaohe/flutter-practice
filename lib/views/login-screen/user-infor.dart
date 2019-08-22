@@ -1,7 +1,8 @@
 import "package:flutter/material.dart";
 
 import "package:my_app/services/http.dart";
-import 'package:my_app/routes/parameter.dart';
+import "package:my_app/routes/parameter.dart";
+import "package:my_app/global/setting.dart";
 
 class UserInfor extends StatefulWidget {
   @override
@@ -58,32 +59,50 @@ class UserInforState extends State<UserInfor> {
             new Container(
                 margin: new EdgeInsets.fromLTRB(17, 47, 17, 0),
                 child: new Container(
-                    decoration: BoxDecoration(boxShadow: [
-                      BoxShadow(
-                          blurRadius: 6,
-                          offset: Offset(0, 6),
-                          spreadRadius: -3,
-                          color: Color.fromARGB(120, 0, 192, 141))
-                    ]),
-                    child: new Card(
-                        color: Color.fromARGB(255, 0, 192, 141),
-                        child: new FlatButton(
-                            padding: new EdgeInsets.symmetric(horizontal: 20),
-                            onPressed: _login,
-                            textColor: Colors.white,
-                            child: Text(
-                              "马上登录",
-                              style: TextStyle(fontSize: 16.0),
-                            )))))
+                  decoration: BoxDecoration(boxShadow: [
+                    BoxShadow(
+                        blurRadius: 6,
+                        offset: Offset(0, 6),
+                        spreadRadius: -3,
+                        color: Color.fromARGB(120, 0, 192, 141))
+                  ]),
+                  child: new Card(
+                      color: Color.fromARGB(255, 0, 192, 141),
+                      child: new FlatButton(
+                          padding: new EdgeInsets.symmetric(horizontal: 20),
+                          onPressed: () async {
+                            var response = await Http.doLogin({
+                              "phone": userNameController.text,
+                              "code": userPwdController.text,
+                            });
+                            if (response.code == 0) {
+                              final responseUser = response.data["user"];
+                              UserInforData userInforData = UserInforData(
+                                city: responseUser["city"],
+                                signature: responseUser["signature"],
+                                photoUrl: responseUser["photoUrl"],
+                                email: responseUser["email"],
+                                phone: responseUser["phone"],
+                                id: responseUser["_id"],
+                                name: responseUser["name"],
+                                token: response.token,
+                                unReadCount: response.unReadCount,
+                                setPayPass: response.setPayPass,
+                                level: response.level,
+                                creditValue: response.creditValue,
+                                withdrawalAmount: response.withdrawalAmount,
+                              );
+                              print(userInforData);
+                              Navigator.of(context).pushNamed("/home");
+                            }
+                          },
+                          textColor: Colors.white,
+                          child: Text(
+                            "马上登录",
+                            style: TextStyle(fontSize: 16.0),
+                          ))),
+                ))
           ],
         ));
-  }
-
-  void _login() async {
-    // var response = await Http.doLogin({
-    //   "phone": "18911024431",
-    //   "code": "community",
-    // });
-    Navigator.of(context).pushNamed("/home");
   }
 }

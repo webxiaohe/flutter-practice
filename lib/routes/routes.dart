@@ -21,7 +21,6 @@ final Map<String, WidgetBuilder> routes = {
 
 Route<dynamic> routeFactory(RouteSettings settings) {
   WidgetBuilder builder;
-  print(settings.name);
 
   if (builder != null)
     return MaterialPageRoute(builder: builder, settings: settings);

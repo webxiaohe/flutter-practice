@@ -8,7 +8,8 @@ import 'package:my_app/model/userinfor.dart';
 class Http {
   static Future<UserInfor> doLogin(Map<String, String> params) async {
     var response = await Net.post(Api.DO_LOGIN, params);
-    return response;
+    final responseJson = json.decode(response);
+    return new UserInfor.fromJson(responseJson);
   }
 
   static Future<VerifyCode> sendVerifyCode(Map<String, String> params) async {

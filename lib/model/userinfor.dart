@@ -1,9 +1,12 @@
 class UserInfor {
   int code;
-  UserInforData data;
+  Map data;
   String token;
   int unReadCount;
   bool setPayPass;
+  int level;
+  int creditValue;
+  int withdrawalAmount;
 
   UserInfor({
     this.code,
@@ -11,6 +14,9 @@ class UserInfor {
     this.token,
     this.unReadCount,
     this.setPayPass,
+    this.level,
+    this.creditValue,
+    this.withdrawalAmount,
   });
 
   factory UserInfor.fromJson(Map<String, dynamic> json) {
@@ -20,6 +26,9 @@ class UserInfor {
       token: json["token"],
       unReadCount: json["unReadCount"],
       setPayPass: json["setPayPass"],
+      level: json["level"],
+      creditValue: json["creditValue"],
+      withdrawalAmount: json["withdrawalAmount"],
     );
   }
 }
