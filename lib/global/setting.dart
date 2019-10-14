@@ -1,23 +1,45 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
 import "package:scoped_model/scoped_model.dart";
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings extends Model {
-  static Settings of(BuildContext context) {
-    return ScopedModel.of(context);
-  }
-
   bool _isLogin = false;
   bool get isLogin => _isLogin;
   UserInforData _userinfor;
   UserInforData get userinfor => _userinfor;
-  SharedPreferences _preferences;
 
-  void saveUserInfor(UserInforData userinforData) {
+  Future<void> saveUserInfor(
+      UserInforData userinforData, dynamic userinforDataString) async {
     _isLogin = true;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     _userinfor = userinforData;
-    _preferences.setString("id", userinforData.id);
+    prefs.setString("id", userinforData.id);
+    print(json.encode(userinforDataString));
+    prefs.setString("userinforData", json.encode(userinforDataString));
+    notifyListeners();
+  }
+
+  Future<void> getUserInfor() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    dynamic response = json.decode(prefs.getString("userinforData"));
+    dynamic responseUser = response["user"];
+    UserInforData userinforData = UserInforData(
+      city: responseUser["city"],
+      signature: responseUser["signature"],
+      photoUrl: responseUser["photoUrl"],
+      email: responseUser["email"],
+      phone: responseUser["phone"],
+      id: responseUser["_id"],
+      name: responseUser["name"],
+      token: response["token"],
+      unReadCount: response["unReadCount"],
+      setPayPass: response["setPayPass"],
+      level: response["level"],
+      creditValue: response["creditValue"],
+      withdrawalAmount: response["withdrawalAmount"],
+    );
+    _userinfor = userinforData;
     notifyListeners();
   }
 }

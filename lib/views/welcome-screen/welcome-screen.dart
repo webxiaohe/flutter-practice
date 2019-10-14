@@ -59,14 +59,14 @@ class WelcomeScreenState extends State<WelcomeScreen> {
             Container(
                 margin: EdgeInsets.only(top: 27.0, bottom: 16.0),
                 child: Card(
-                    color: Color.fromARGB(255, 0, 192, 141),
-                    child: new FlatButton(
-                        textColor: Colors.white,
-                        onPressed: () {
-                          this.sendVertifyCode(context);
-                        },
-                        child:
-                            Text("获取验证码", style: TextStyle(fontSize: 16.0))))),
+                  color: Color.fromARGB(255, 0, 192, 141),
+                  child: new FlatButton(
+                      textColor: Colors.white,
+                      onPressed: () {
+                        this.sendVertifyCode(context);
+                      },
+                      child: Text("获取验证码", style: TextStyle(fontSize: 16.0))),
+                )),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -94,7 +94,7 @@ class WelcomeScreenState extends State<WelcomeScreen> {
     var response = await Http.sendVerifyCode({"phone": phoneController.text});
     if (response.code == 0) {
       Navigator.of(context).pushNamed("/login",
-          arguments: Welcome(phoneController.text, response.data));
+          arguments: Welcome(phoneController.text));
     }
   }
 }

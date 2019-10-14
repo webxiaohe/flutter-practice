@@ -8,7 +8,13 @@ class LoginScreen extends StatefulWidget {
   createState() => new LoginScreenState();
 }
 
-class LoginScreenState extends State<LoginScreen> {
+class LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -20,5 +26,11 @@ class LoginScreenState extends State<LoginScreen> {
         ),
       )),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
   }
 }

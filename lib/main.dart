@@ -1,8 +1,10 @@
 import "package:flutter/material.dart";
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 import 'routes/routes.dart';
 import 'widget/page-splash.dart';
+import 'package:my_app/global/setting.dart';
 
 void main() {
   runApp(PageSplash(
@@ -16,22 +18,26 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  final Settings settingsModel = Settings();
   final SharedPreferences preferences;
-  MyApp({Key key, @required this.preferences}) : super(key: key);
+  MyApp({Key key, this.preferences}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: "Welcome to Flutter",
-      initialRoute: getInitialRoute(),
-      onGenerateRoute: routeFactory,
-      routes: routes,
+    return new ScopedModel<Settings>(
+      model: settingsModel,
+      child: new MaterialApp(
+        title: "Welcome to Flutter",
+        initialRoute: getInitialRoute(),
+        onGenerateRoute: routeFactory,
+        routes: routes,
+      ),
     );
   }
 
   String getInitialRoute() {
-    String id = preferences.getString("id");
-    if (id != null && id.length > 0) {
+    bool isLogin = preferences.getBool("isLogin");
+    if (isLogin != null && isLogin) {
       return pageHome;
     }
     return pageWelcome;

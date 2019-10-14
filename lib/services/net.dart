@@ -21,7 +21,6 @@ class Net {
   // post
   static Future post(String url, Map<String, dynamic> params) async {
     http.Response res = await http.post(url, body: params);
-    print(res.statusCode);
     return res.body;
   }
 }

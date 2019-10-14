@@ -1,34 +1,47 @@
 import "package:flutter/material.dart";
+import "package:scoped_model/scoped_model.dart";
+
+import "package:my_app/global/setting.dart";
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: new Container(
-          decoration: BoxDecoration(color: Colors.grey[100]),
-          child: new Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Banner(),
-              Content(),
-            ],
-          ),
-        ),
-        drawer: new Drawer(
-          child: Center(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text("Drawer"),
-              RaisedButton(
-                child: Text("Back"),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
-          )),
-        ));
+    return ScopedModelDescendant<Settings>(
+      builder: (context, child, model) {
+        return Scaffold(
+            body: new Container(
+              decoration: BoxDecoration(color: Colors.grey[100]),
+              child: new Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  Banner(),
+                  FlatButton(
+                      child: Text("获取用户信息"),
+                      onPressed: () async {
+                        await model.getUserInfor();
+                        print(model.userinfor.phone);
+                      }),
+                  Content(),
+                ],
+              ),
+            ),
+            drawer: new Drawer(
+              child: Center(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text("Drawer"),
+                  RaisedButton(
+                    child: Text("Back"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ],
+              )),
+            ));
+      },
+    );
   }
 }
 
